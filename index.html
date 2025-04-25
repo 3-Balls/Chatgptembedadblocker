@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Embed Website Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #embedContainer {
+            margin-top: 20px;
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 500px; /* Center text vertically */
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h2>Embed Website Viewer</h2>
+    <label for="urlInput">Enter Website URL:</label>
+    <input type="text" id="urlInput" placeholder="e.g. https://www.example.com">
+    <button onclick="embedWebsite()">Embed Website</button>
+
+    <div id="embedContainer">
+        <!-- Embed content will appear here -->
+        <p>Enter a url (https://www.example.com/</p>
+    </div>
+
+    <script>
+        function embedWebsite() {
+            var url = document.getElementById('urlInput').value;
+            if (url) {
+                // Create an embed element
+                var embed = document.createElement('embed');
+                embed.src = url;
+                embed.width = "100%";
+                embed.height = "100%";
+                embed.onerror = function() {
+                    document.getElementById('embedContainer').innerHTML = '<p>Could not load the website. Please check the URL or try another one.</p>';
+                };
+
+                // Clear previous embedded content and append the new one
+                var container = document.getElementById('embedContainer');
+                container.innerHTML = ''; // Clear any previous embed
+                container.appendChild(embed);
+            } else {
+                alert("Please enter a valid website URL.");
+            }
+        }
+    </script>
+</body>
+</html>
